@@ -39,14 +39,20 @@ const Calendar = ({
 
   useEffect(() => {
     const element = calendarElement.current;
-    
+
     const handleKeyUp = ({ key }) => {
       /* istanbul ignore else */
       if (key === 'Tab') element.current.classList.remove('-noFocusOutline');
     };
-    element.current.addEventListener('keyup', handleKeyUp, false);
+
+    if (element !== null) {
+      element.current.addEventListener('keyup', handleKeyUp, false);
+    }
+
     return () => {
-      element.current.removeEventListener('keyup', handleKeyUp, false);
+      if (element !== null) {
+        element.current.removeEventListener('keyup', handleKeyUp, false);
+      }
     };
   });
 
